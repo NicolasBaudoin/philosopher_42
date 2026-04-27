@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 15:38:30 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/27 10:00:23 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/04/27 10:36:17 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/04/27 11:42:03 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "../philo.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+	{
+		display_error("ft_strlen error", 0, NULL);
+		return (0);
+	}
+	while (str[i])
+		i++;
+	return (i);
+}
 
 int	ft_atoi(const char *nptr)
 {

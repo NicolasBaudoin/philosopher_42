@@ -6,22 +6,22 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/25 17:28:16 by nbaudoin          #+#    #+#              #
-#    Updated: 2026/04/27 11:27:47 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/04/27 11:40:04 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -I.
 
 cyan = /bin/echo -e "\x1b[36m\#\# $1\x1b[0m"
 
-SRC_DIR = src
+UTILS_DIR = src/utils
 
-SRC_FILES = ${SRC_DIR}/main.c ${SRC_DIR}/atoi.c \
-${SRC_DIR}/error.c ${SRC_DIR}/parse.c \
- ${SRC_DIR}/len.c ${SRC_DIR}/put_family.c  ${SRC_DIR}/utils.c
+UTILS_FILES = ${UTILS_DIR}/utils.c ${UTILS_DIR}/put_utils.c
+
+SRC_FILES = src/main.c src/error.c src/parse.c ${UTILS_FILES}
 
 OBJ_DIR = obj
 

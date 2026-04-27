@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:38:30 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/25 15:38:39 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/27 10:00:23 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,27 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (nbr * sign);
+}
+
+long	ft_atol(char *args)
+{
+	long	value;
+	int		sign;
+	int		i;
+
+	value = 0;
+	sign = 1;
+	i = 0;
+	if (args[i] == '-' || args[i] == '+')
+	{
+		if (args[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (args[i])
+	{
+		value = value * 10 + (args[i] - '0');
+		i++;
+	}
+	return (value * sign);
 }

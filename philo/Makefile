@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/25 17:28:16 by nbaudoin          #+#    #+#              #
-#    Updated: 2026/04/25 17:42:36 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/04/27 10:43:23 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ cyan = /bin/echo -e "\x1b[36m\#\# $1\x1b[0m"
 SRC_DIR = src
 
 SRC_FILES = ${SRC_DIR}/main.c ${SRC_DIR}/atoi.c \
-${SRC_DIR}/error.c ${SRC_DIR}/input_verification.c \
- ${SRC_DIR}/len.c
+${SRC_DIR}/error.c ${SRC_DIR}/parse.c \
+ ${SRC_DIR}/len.c ${SRC_DIR}/putFamily.c  ${SRC_DIR}/utils.c
 
 OBJ_DIR = obj
 
@@ -34,7 +34,7 @@ all: $(NAME)
 
 ${NAME} : ${OBJ}
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@$(call cyan,"Creating so_long...")
+	@$(call cyan,"Creating Philo...")
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -52,4 +52,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re philo
+.PHONY: all clean fclean re

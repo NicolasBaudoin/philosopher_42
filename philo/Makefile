@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/25 17:28:16 by nbaudoin          #+#    #+#              #
-#    Updated: 2026/04/27 12:07:16 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/04/27 18:00:41 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ UTILS_DIR = src/utils
 
 UTILS_FILES = ${UTILS_DIR}/utils.c ${UTILS_DIR}/put_utils.c
 
-SRC_FILES = src/main.c src/error.c src/parse.c ${UTILS_FILES}
+SRC_FILES = src/main.c src/error.c src/parse.c ${UTILS_FILES} \
+src/init.c
 
 OBJ_DIR = obj
 

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/27 18:19:45 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/27 18:38:06 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_putendl_fd(char *s, int fd);
 
 
 // @test
-void  yourTurn(void);
+void  yourTurn();
 void  *myTurn(void *ptr);
 
 #endif

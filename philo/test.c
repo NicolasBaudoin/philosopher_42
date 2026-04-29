@@ -19,6 +19,7 @@ pthread_mutex_t print_mutex;
 void    print_status(t_philo *philo, char *status)
 {
     pthread_mutex_lock(&print_mutex);
+    write(1, "")
     printf("Philo %d %s\n", philo->id, status);
     pthread_mutex_unlock(&print_mutex);
 }
@@ -32,19 +33,19 @@ void    *routine(void *arg)
         // penser
         print_status(philo, "is thinking");
 
-        // prendre les fourchettes
-        pthread_mutex_lock(philo->left_fork);
-        print_status(philo, "took left fork");
-        pthread_mutex_lock(philo->right_fork);
-        print_status(philo, "took right fork");
+        // // prendre les fourchettes
+        // pthread_mutex_lock(philo->left_fork);
+        // print_status(philo, "took left fork");
+        // pthread_mutex_lock(philo->right_fork);
+        // print_status(philo, "took right fork");
 
-        // manger
-        print_status(philo, "is eating");
-        usleep(200000); // 200ms
+        // // manger
+        // print_status(philo, "is eating");
+        // usleep(200000); // 200ms
 
-        // poser les fourchettes
-        pthread_mutex_unlock(philo->right_fork);
-        pthread_mutex_unlock(philo->left_fork);
+        // // poser les fourchettes
+        // pthread_mutex_unlock(philo->right_fork);
+        // pthread_mutex_unlock(philo->left_fork);
 
         // dormir
         print_status(philo, "is sleeping");

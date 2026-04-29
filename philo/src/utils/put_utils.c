@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 10:03:56 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 12:08:16 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 13:04:05 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-void    write_status(t_philo *philo, char *status)
+void    write_status(t_data *data, t_philo *philo, char *status)
 {
-    pthread_mutex_lock(&print_mutex);
+    pthread_mutex_lock(&data->write_mutex);
     printf("Philo %d %s\n", philo->id, status);
-    pthread_mutex_unlock(&print_mutex);
+    pthread_mutex_unlock(&data->write_mutex);
 }

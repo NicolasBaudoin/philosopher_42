@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 11:15:03 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 13:00:58 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void init_data(char **av, t_data *data)
 		data->nb_time_philo_must_eat = 0;
 	else
 		data->nb_time_philo_must_eat = ft_atoi(av[5]);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
+	data->philo = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
 }

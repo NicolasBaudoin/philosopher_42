@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 15:17:37 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 12:46:12 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/04/29 13:01:29 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/04/29 13:07:03 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	init_malloc(void *ptr; void *type, int size)
 {
 
-	t_data data;
-
-	if (input_not_valid(ac, av))
-		return (1);
-	init_data(av, &data);
-	// pthread_create(&thread, NULL, myTurn, NULL);
-	// // myTurn();
-	// yourTurn();
-	// pthread_join(thread, (void *)&result);
-	// ft_write_printf("Thread finished : ", *result, " ", 1, 1);
-	// // printf("thread finished : %d\n", *result);
-	return (0);
 }
-
-
-

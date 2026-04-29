@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 12:11:45 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 12:56:23 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@
 
 typedef struct s_philo
 {
-	int	pid;
+	int	id;
 	// int	time_until_death;
-	// int	time_last_meal;
+	int	time_last_meal;
 	// int	status;
-	// int	nb_meal_eaten;
+	int	nb_meal_eaten;
 	// pthread_t	thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t *right_fork;
+	t_data *data
 }				t_philo;
 
 typedef struct s_data
@@ -45,7 +46,8 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	nb_time_philo_must_eat;
 	long	start_time;
-	// pthread_mutex_t	dead_mutex;
+	int	dead;
+	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*forks;
 	t_philo	*philo;

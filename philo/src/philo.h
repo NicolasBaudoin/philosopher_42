@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 12:56:23 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 14:33:10 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
+#include <sys/time.h>
 
 # include <stdio.h>
 
@@ -28,11 +29,8 @@
 typedef struct s_philo
 {
 	int	id;
-	// int	time_until_death;
 	int	time_last_meal;
-	// int	status;
 	int	nb_meal_eaten;
-	// pthread_t	thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t *right_fork;
 	t_data *data
@@ -68,7 +66,7 @@ int		intput_not_number(char **av);
 
 // init
 
-void	init_data(char **av, t_data *data);
+int		init_data(char **av, t_data *data);
 
 // ==========
 // @UTILS
@@ -83,6 +81,8 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_write_printf(char *msg_before_var, int var, char *msg_after_var,
 	int endline, int fd);
+long	get_time(void);
+int		update_sleep(long miliseconds);
 
 
 // @test

@@ -6,13 +6,55 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 13:00:58 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 14:36:30 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init_data(char **av, t_data *data)
+void	init_philo(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		data->philo[i].id = i + 1;
+		data->philo[i].time_last_meal = 0;
+		data->philo[i].nb_meal_eaten = 0;
+		data->philo[i].left_fork = &data->forks[i];
+		data->philo[i].right_fork = &data->forks[(i + 1) % data->number_of_philo];
+		data->philo[i].data = data;
+		i++;
+	}
+}
+
+int	init_forks(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	init_mutex(t_data *data)
+{
+	if (pthread_mutex_init(&data->write_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&data->dead_mutex, NULL))
+		return (1);
+	if (init_forks(data))
+		return (1);
+	return (0);
+}
+
+int init_data(char **av, t_data *data)
 {
 	data->number_of_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
@@ -23,5 +65,18 @@ void init_data(char **av, t_data *data)
 	else
 		data->nb_time_philo_must_eat = ft_atoi(av[5]);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
-	data->philo = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
+	if (!data->forks)
+		return (1);
+	data->philo = malloc(sizeof(t_philo) * data->number_of_philo);
+	if (!data->philo)
+		return (1); /*avec free all*/
+	data->dead = 0;
+	if (init_mutex(data))
+	{
+		free_all(data);
+		return (1);
+	}
+	init_philo(data);
+	data->start_time = get_time();
+	return (0);
 }

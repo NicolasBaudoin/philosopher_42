@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/27 18:38:06 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/04/29 12:11:45 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 typedef struct s_philo
 {
 	int	pid;
-	int	time_until_death;
-	int	time_last_meal;
-	int	status;
-	int	nb_meal;
-	pthread_t	thread;
+	// int	time_until_death;
+	// int	time_last_meal;
+	// int	status;
+	// int	nb_meal_eaten;
+	// pthread_t	thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t *right_fork;
 }				t_philo;
 
 typedef struct s_data
@@ -42,8 +44,11 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nb_time_philo_must_eat;
-	t_philo	philo;
-	int	philo_feedback_state;
+	long	start_time;
+	// pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	*forks;
+	t_philo	*philo;
 
 }				t_data;
 
@@ -74,6 +79,8 @@ int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
+void	ft_write_printf(char *msg_before_var, int var, char *msg_after_var,
+	int endline, int fd);
 
 
 // @test

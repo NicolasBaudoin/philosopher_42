@@ -6,11 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 13:55:27 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 14:06:19 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:16:21 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 long	get_time(void)
 {

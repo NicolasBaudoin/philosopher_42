@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:19:05 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/27 11:57:13 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:10:45 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ int	input_does_not_exist(char **av)
 int	input_not_positive_or_too_high(char **av)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (av[i])
 	{
-		j = 0;
 		if (atol(av[i]) < 0 || atol(av[i]) > INT_MAX)
 		{
 			display_error(" is not a valid number", i, av[i]);

@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/25 17:28:16 by nbaudoin          #+#    #+#              #
-#    Updated: 2026/04/27 18:00:41 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/05/01 10:09:52 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ cyan = /bin/echo -e "\x1b[36m\#\# $1\x1b[0m"
 
 UTILS_DIR = src/utils
 
-UTILS_FILES = ${UTILS_DIR}/utils.c ${UTILS_DIR}/put_utils.c
+UTILS_FILES = ${UTILS_DIR}/utils.c ${UTILS_DIR}/put_utils.c\
+	${UTILS_DIR}/memory_utils.c ${UTILS_DIR}/time.c
 
 SRC_FILES = src/main.c src/error.c src/parse.c ${UTILS_FILES} \
 src/init.c

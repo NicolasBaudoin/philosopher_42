@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 14:33:10 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:15:39 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 // ===== @STRUCTURES =====
 
+typedef struct s_data t_data;
+
 typedef struct s_philo
 {
 	int	id;
@@ -33,7 +35,7 @@ typedef struct s_philo
 	int	nb_meal_eaten;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t *right_fork;
-	t_data *data
+	t_data *data;
 }				t_philo;
 
 typedef struct s_data
@@ -67,6 +69,9 @@ int		intput_not_number(char **av);
 // init
 
 int		init_data(char **av, t_data *data);
+void	init_philo(t_data *data);
+int		init_forks(t_data *data);
+int		init_mutex(t_data *data);
 
 // ==========
 // @UTILS
@@ -79,14 +84,14 @@ int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_write_printf(char *msg_before_var, int var, char *msg_after_var,
-	int endline, int fd);
+void	write_status(t_philo *philo, char *status);
 long	get_time(void);
 int		update_sleep(long miliseconds);
+void	free_all(t_data *data);
 
 
 // @test
-void  yourTurn();
-void  *myTurn(void *ptr);
+void	yourTurn();
+void	*myTurn(void *ptr);
 
 #endif

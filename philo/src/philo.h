@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:44:16 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 11:51:16 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdio.h>
 
 // ===== @MACROS =====
-
+# define ALIVE 42
 // ===== @STRUCTURES =====
 
 typedef struct s_data t_data;
@@ -77,6 +77,8 @@ int		init_malloc(t_data *data);
 // Simulation
 
 int		simulation(t_data *data);
+int		init_thread(t_data *data, pthread_t *tids);
+void	*routine(void	*arg);
 
 // ==========
 // @UTILS
@@ -93,7 +95,8 @@ void	write_status(t_philo *philo, char *status);
 long	get_time(void);
 int		update_sleep(long miliseconds);
 void	free_all(t_data *data);
-
+int		is_dead(t_data *data);
+void	set_dead(t_data *data);
 
 // @test
 void	yourTurn();

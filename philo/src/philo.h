@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:17:09 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:44:16 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_data t_data;
 typedef struct s_philo
 {
 	int	id;
-	int	time_last_meal;
+	long	time_last_meal;
 	int	nb_meal_eaten;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t *right_fork;
@@ -72,6 +72,11 @@ int		init_data(char **av, t_data *data);
 void	init_philo(t_data *data);
 int		init_forks(t_data *data);
 int		init_mutex(t_data *data);
+int		init_malloc(t_data *data);
+
+// Simulation
+
+int		simulation(t_data *data);
 
 // ==========
 // @UTILS

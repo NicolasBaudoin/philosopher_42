@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:17:37 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/04/29 14:37:30 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:40:55 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 int	main(int ac, char **av)
 {
 
-	t_data data;
+	t_data	data;
+	int		sim;
 
 	if (input_not_valid(ac, av))
 		return (1);
 	if (init_data(av, &data))
-	{
-		free_all(&data);
 		return (1);
-	}
+	sim = simulation(&data);
 
 
 	/*
@@ -54,7 +53,8 @@ int	main(int ac, char **av)
 
 
 	// pthread_create(&thread, NULL, myTurn, NULL);
-	return (0);
+	free_all(&data);
+	return (sim);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:15:39 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/01 10:17:09 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 # include <stdio.h>
 

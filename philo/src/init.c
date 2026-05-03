@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:29:31 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 10:11:01 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_philo(t_data *data)
 	while (i < data->number_of_philo)
 	{
 		data->philo[i].id = i + 1;
-		data->philo[i].time_last_meal = 0;
+		data->philo[i].time_last_meal = data->start_time;
 		data->philo[i].nb_meal_eaten = 0;
 		data->philo[i].left_fork = &data->forks[i];
 		data->philo[i].right_fork = &data->forks[(i + 1) % data->number_of_philo];
@@ -48,6 +48,8 @@ int	init_mutex(t_data *data)
 	if (pthread_mutex_init(&data->write_mutex, NULL))
 		return (1);
 	if (pthread_mutex_init(&data->dead_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&data->meal_mutex, NULL))
 		return (1);
 	if (init_forks(data))
 		return (1);
@@ -87,7 +89,8 @@ int init_data(char **av, t_data *data)
 		free_all(data);
 		return (1);
 	}
-	init_philo(data);
 	data->start_time = get_time();
+	init_philo(data);
+
 	return (0);
 }

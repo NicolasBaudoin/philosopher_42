@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 11:51:16 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 10:01:43 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdio.h>
 
 // ===== @MACROS =====
-# define ALIVE 42
 // ===== @STRUCTURES =====
 
 typedef struct s_data t_data;
@@ -50,6 +49,7 @@ typedef struct s_data
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	meal_mutex;
 	t_philo	*philo;
 
 }				t_data;
@@ -79,6 +79,7 @@ int		init_malloc(t_data *data);
 int		simulation(t_data *data);
 int		init_thread(t_data *data, pthread_t *tids);
 void	*routine(void	*arg);
+int		sim_is_over(t_data *data);
 
 // ==========
 // @UTILS

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 10:03:56 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:23:20 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 13:22:14 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,22 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-void    write_status(t_philo *philo, char *status)
+void	write_output(t_data *data, int philo, char *output)
+{
+	ft_putnbr_fd(get_time() - data->start_time, 1);
+	ft_putstr_fd(" ", 1);
+	ft_putnbr_fd(philo, 1);
+	ft_putstr_fd(output, 1);
+}
+
+void	write_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->data->write_mutex);
+	if (philo->data->dead)
+	{
+		pthread_mutex_unlock(&philo->data->write_mutex);
+		return ;
+	}
 	ft_putnbr_fd(get_time() - philo->data->start_time, 1);
 	ft_putstr_fd(" ", 1);
 	ft_putnbr_fd(philo->id, 1);

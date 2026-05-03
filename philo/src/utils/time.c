@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 13:55:27 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:16:21 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 13:23:26 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ long	get_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-
 int	update_sleep(long miliseconds)
 {
 	long	now;
 
 	now = get_time();
 	while (get_time() - now < miliseconds)
-		usleep(150);
+		usleep(50);
 	return (1);
 }

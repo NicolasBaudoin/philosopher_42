@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 10:11:01 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 13:29:30 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_philo(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->number_of_philo)
@@ -23,7 +23,8 @@ void	init_philo(t_data *data)
 		data->philo[i].time_last_meal = data->start_time;
 		data->philo[i].nb_meal_eaten = 0;
 		data->philo[i].left_fork = &data->forks[i];
-		data->philo[i].right_fork = &data->forks[(i + 1) % data->number_of_philo];
+		data->philo[i].right_fork = &data->forks[(i + 1)
+			% data->number_of_philo];
 		data->philo[i].data = data;
 		i++;
 	}
@@ -31,7 +32,7 @@ void	init_philo(t_data *data)
 
 int	init_forks(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->number_of_philo)
@@ -71,12 +72,14 @@ int	init_malloc(t_data *data)
 	return (0);
 }
 
-int init_data(char **av, t_data *data)
+int	init_data(char **av, t_data *data)
 {
 	data->number_of_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
+	data->philo_done = 0;
+	data->thread_alive = data->number_of_philo;
 	if (!av[5] || !av[5][0])
 		data->nb_time_philo_must_eat = 0;
 	else
@@ -91,6 +94,5 @@ int init_data(char **av, t_data *data)
 	}
 	data->start_time = get_time();
 	init_philo(data);
-
 	return (0);
 }

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 15:20:55 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:26:07 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/03 12:46:23 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/03 12:47:11 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-void	display_error(char *error_msg, int arg_pos, char *arg_value)
+void	wait_thread(t_data *data)
 {
-	char	*truc;
-
-	ft_putendl_fd("Error", 2);
-	if (arg_pos != 0)
+	while (1)
 	{
-		truc = "Arg n° ";
-		ft_putstr_fd(truc, 2);
-		ft_putnbr_fd(arg_pos, 2);
-		ft_putstr_fd(" : ", 2);
+		pthread_mutex_lock(&data->meal_mutex);
+		if (data->thread_alive == 0)
+		{
+			pthread_mutex_unlock(&data->meal_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&data->meal_mutex);
+		usleep(100);
 	}
-	if (arg_value)
-	{
-		ft_putstr_fd(arg_value, 2);
-	}
-	ft_putendl_fd(error_msg, 2);
 }

@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/25 17:28:16 by nbaudoin          #+#    #+#              #
-#    Updated: 2026/05/01 11:47:09 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/05/03 12:52:06 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,15 @@ CFLAGS := -Wall -Werror -Wextra -I.
 cyan = /bin/echo -e "\x1b[36m\#\# $1\x1b[0m"
 
 UTILS_DIR = src/utils
+NORME_DIR = src/norme_split_function
 
 UTILS_FILES = ${UTILS_DIR}/utils.c ${UTILS_DIR}/put_utils.c\
 	${UTILS_DIR}/memory_utils.c ${UTILS_DIR}/time.c \
-	${UTILS_DIR}/status.c
+	${UTILS_DIR}/status.c ${UTILS_DIR}/wait_threads.c
+NORME_FILES = ${NORME_DIR}/monitor.c ${NORME_DIR}/routine.c
 
 SRC_FILES = src/main.c src/error.c src/parse.c ${UTILS_FILES} \
-src/init.c src/simulation.c
+src/init.c src/simulation.c ${NORME_FILES}
 
 OBJ_DIR = obj
 

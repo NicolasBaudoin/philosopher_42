@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:19:05 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/01 10:10:45 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 13:30:08 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	input_not_valid(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
 	{
-		display_error("Program takes four or five arguments", 0, NULL);
+		display_error("invalid arguments, program takes four or five arguments",
+			0, NULL);
 		return (1);
 	}
 	if (input_does_not_exist(av))
@@ -32,12 +33,12 @@ int	input_does_not_exist(char **av)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
-		if(!av[i] || !av[i][0])
+		if (!av[i] || !av[i][0])
 		{
-			display_error(" does not exist", i, NULL);
+			display_error(" is invalid", i, av[i]);
 			return (1);
 		}
 		i++;
@@ -49,22 +50,22 @@ int	input_not_positive_or_too_high(char **av)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
-		if (atol(av[i]) < 0 || atol(av[i]) > INT_MAX)
+		if (atol(av[i]) <= 0 || atol(av[i]) > INT_MAX)
 		{
-			display_error(" is not a valid number", i, av[i]);
+			display_error(" is invalid", i, av[i]);
 			return (1);
 		}
 		if (ft_atol(av[1]) > 200)
 		{
-			display_error(" is over 200, we don't verify over 200 philosophers", 1, av[1]);
+			display_error(" is invalid, we dont verify over 200", 1, av[1]);
 			return (1);
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 int	intput_not_number(char **av)
@@ -80,7 +81,7 @@ int	intput_not_number(char **av)
 		{
 			if (!ft_isdigit(av[i][j]))
 			{
-				display_error(" is not a number", i, av[i]);
+				display_error(" is invalid number", i, av[i]);
 				return (1);
 			}
 			j++;

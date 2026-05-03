@@ -6,11 +6,27 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 12:03:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:30:48 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/03 14:14:53 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	wait_for_forks(t_philo *philo)
+{
+	while (1)
+	{
+		pthread_mutex_lock(&philo->data->forks_mutex);
+		if (philo->data->forks_available > 0)
+		{
+			philo->data->forks_available--;
+			pthread_mutex_unlock(&philo->data->forks_mutex);
+			break;
+		}
+		pthread_mutex_unlock(&philo->data->forks_mutex);
+		usleep(100);
+	}
+}
 
 void	take_forks(t_philo *philo)
 {
@@ -28,12 +44,17 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		write_status(philo, "has taken a fork");
 	}
+	if (is_dead(philo->data))
+		return ;
 }
 
 void	drop_forks(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->data->forks_mutex);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	philo->data->forks_available++;
+	pthread_mutex_unlock(&philo->data->forks_mutex);
 }
 
 int	eat_meal(t_philo *philo)
@@ -63,4 +84,5 @@ void	sleep_and_think(t_philo *philo)
 	write_status(philo, "is sleeping");
 	update_sleep(philo->data->time_to_sleep);
 	write_status(philo, "is thinking");
+	usleep(500);
 }

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:31:02 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:55:00 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ void	*routine(void	*arg);
 
 // routine
 
-void	take_forks(t_philo *philo);
+int	take_forks(t_philo *philo);
 void	drop_forks(t_philo *philo);
 int		eat_meal(t_philo *philo);
 void	sleep_and_think(t_philo *philo);
+int		dead_fork(t_philo *philo, int fork_to_unlock);
 
 // monitor
 

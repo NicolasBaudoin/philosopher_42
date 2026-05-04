@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:37:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:32:20 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:55:49 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	*routine(void	*arg)
 	}
 	while (!is_dead(philo->data))
 	{
-		take_forks(philo);
+		if (take_forks(philo))
+		{
+			update_thread_alive(philo);
+			return (NULL);
+		}
 		if (eat_meal(philo))
 		{
 			update_thread_alive(philo);

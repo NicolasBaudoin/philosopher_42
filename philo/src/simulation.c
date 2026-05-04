@@ -6,12 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:37:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:30:00 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:32:20 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
 
 void	solo_philo(t_philo *philo)
 {
@@ -58,7 +57,7 @@ void	*routine(void	*arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(200);
 	if (philo->data->number_of_philo == 1)
 	{
 		solo_philo(philo);
@@ -67,8 +66,6 @@ void	*routine(void	*arg)
 	}
 	while (!is_dead(philo->data))
 	{
-		wait_for_forks(philo);
-		usleep(100);
 		take_forks(philo);
 		if (eat_meal(philo))
 		{
@@ -77,7 +74,6 @@ void	*routine(void	*arg)
 		}
 		sleep_and_think(philo);
 	}
-	update_thread_alive(philo);
 	return (NULL);
 }
 

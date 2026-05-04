@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 10:03:56 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:27:29 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:43:03 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ void	write_output(t_data *data, int philo, char *output)
 void	write_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->data->dead_mutex);
-	if (philo->data->dead)
-	{
-		pthread_mutex_unlock(&philo->data->dead_mutex);
-		return ;
-	}
+    if (philo->data->dead)
+    {
+        pthread_mutex_unlock(&philo->data->dead_mutex);
+        return ;
+    }
 	pthread_mutex_unlock(&philo->data->dead_mutex);
-
 	pthread_mutex_lock(&philo->data->write_mutex);
 	ft_putnbr_fd(get_time() - philo->data->start_time, 1);
 	ft_putstr_fd(" ", 1);

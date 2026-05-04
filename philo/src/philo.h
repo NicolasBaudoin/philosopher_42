@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:20:47 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 12:31:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct s_data
 	int				dead;
 	int				philo_done;
 	int				thread_alive;
-	int				forks_available;
-	pthread_mutex_t	forks_mutex;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*forks;
@@ -103,7 +101,6 @@ void	update_last_meal(t_data *data, long *last_meal, int *i);
 // simulation
 
 void	wait_thread(t_data *data);
-void	wait_for_forks(t_philo *philo);
 
 // ==========
 // @UTILS

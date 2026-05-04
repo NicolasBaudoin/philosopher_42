@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:17:37 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:25:42 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:24:43 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int ac, char **av)
 	if (init_data(av, &data))
 		return (1);
 	sim = simulation(&data);
-	free_all(&data);
+	// free_all(&data);
 	return (sim);
 }

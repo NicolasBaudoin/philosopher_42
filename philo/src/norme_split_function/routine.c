@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 12:03:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:59:19 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:27:56 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	eat_meal(t_philo *philo)
 	write_status(philo, "is eating");
 	update_sleep(philo->data->time_to_eat);
 	drop_forks(philo);
+	if (is_dead(philo->data))
+        return (1);
 	return (0);
 }
 

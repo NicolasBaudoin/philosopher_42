@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 13:01:29 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:22:59 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:24:11 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	free_all(t_data *data)
 		pthread_mutex_destroy(&data->dead_mutex);
 		pthread_mutex_destroy(&data->meal_mutex);
 	}
-	if (data->philo)
-	{
-		free(data->philo);
-		data->philo = NULL;
-	}
+	// if (data->philo)
+	// {
+	// 	free(data->philo);
+	// 	data->philo = NULL;
+	// }
 }

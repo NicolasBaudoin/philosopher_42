@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:37:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:55:49 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 15:06:11 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	solo_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	write_status(philo, "has taken a fork");
-	update_sleep(philo->data->time_to_die);
+	write_status(philo, "has taken a fork in solo_philo");
+	update_sleep(philo->data->time_to_die, NULL);
 	write_status(philo, "died");
 	set_dead(philo->data);
 	pthread_mutex_unlock(philo->left_fork);

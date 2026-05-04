@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 12:03:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:59:19 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 15:06:53 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ int	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		if (dead_fork(philo, 1))
 			return (1);
-		write_status(philo, "has taken a fork");
+		write_status(philo, "has taken a right fork in take fork");
 		pthread_mutex_lock(philo->left_fork);
 		if (dead_fork(philo,3))
 			return (1);
-		write_status(philo, "has taken a fork");
+		write_status(philo, "has taken a left fork in take fork");
 	}
 	else
 	{
 		pthread_mutex_lock(philo->left_fork);
 		if (dead_fork(philo, 2))
 			return (1);
-		write_status(philo, "has taken a fork");
+		write_status(philo, "has taken a left fork impair");
 		pthread_mutex_lock(philo->right_fork);
 		if (dead_fork(philo, 3))
 			return (1);
-		write_status(philo, "has taken a fork");
+		write_status(philo, "has taken a right fork impair");
 	}
 	return (0);
 }
@@ -80,13 +80,17 @@ int	eat_meal(t_philo *philo)
 		philo->data->philo_done++;
 		pthread_mutex_unlock(&philo->data->meal_mutex);
 		write_status(philo, "is eating");
-		update_sleep(philo->data->time_to_eat);
+		update_sleep(philo->data->time_to_eat, NULL);
 		drop_forks(philo);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 	write_status(philo, "is eating");
-	update_sleep(philo->data->time_to_eat);
+	if (update_sleep(philo->data->time_to_eat, philo->data))
+	{
+		drop_forks(philo);
+		return (1);
+	}
 	drop_forks(philo);
 	return (0);
 }
@@ -94,7 +98,7 @@ int	eat_meal(t_philo *philo)
 void	sleep_and_think(t_philo *philo)
 {
 	write_status(philo, "is sleeping");
-	update_sleep(philo->data->time_to_sleep);
+	update_sleep(philo->data->time_to_sleep, NULL);
 	write_status(philo, "is thinking");
 	usleep(500);
 }

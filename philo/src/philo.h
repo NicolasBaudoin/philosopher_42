@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/04 12:55:00 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:59:41 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	write_status(t_philo *philo, char *status);
 long	get_time(void);
-int		update_sleep(long miliseconds);
+int		update_sleep(long miliseconds, t_data *data);
 void	free_all(t_data *data);
 int		is_dead(t_data *data);
 void	set_dead(t_data *data);

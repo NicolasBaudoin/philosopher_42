@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 15:26:02 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:43:19 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		update_sleep(philo->data->time_to_eat);
-	// if (solo_philo(philo))
-	// 	return (NULL);
+	if (solo_philo(philo))
+		return (NULL);
 	while (!is_dead(philo->data))
 	{
 		if (philo_eat(philo))
@@ -79,7 +79,7 @@ void	*monitor(void *arg)
 		}
 		if (check_nb_meal(data))
 			return (NULL);
-		usleep(500);
+		update_sleep(1000);
 	}
 	return (NULL);
 }

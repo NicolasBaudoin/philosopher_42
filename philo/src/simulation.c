@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 12:03:02 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:26:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	solo_philo(t_philo *philo)
 {
-	if (philo->data->number_of_philo == 1)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		write_status(philo, "has taken a fork");
-		update_sleep(philo->data->time_to_die);
-		write_status(philo, "died");
-		pthread_mutex_unlock(philo->left_fork);
-		return (1);
-	}
-	return (0);
+    if (philo->data->number_of_philo == 1)
+    {
+        pthread_mutex_lock(philo->left_fork);
+        write_status(philo, "has taken a fork");
+        while (!is_dead(philo->data))
+            usleep(200);
+        pthread_mutex_unlock(philo->left_fork);
+        return (1);
+    }
+    return (0);
 }
 
 void	*routine(void *arg)
@@ -32,9 +32,9 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(500);
-	if (solo_philo(philo))
-		return (NULL);
+		update_sleep(philo->data->time_to_eat);
+	// if (solo_philo(philo))
+	// 	return (NULL);
 	while (!is_dead(philo->data))
 	{
 		if (philo_eat(philo))

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:48:26 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 12:00:27 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:20:25 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_nb_meal(t_data *data)
 	pthread_mutex_lock(&data->meal_mutex);
 	while (i < data->number_of_philo)
 	{
-		if (data->philo[i].nb_meal_eaten >= data->nb_time_philo_must_eat)
+		if (data->philo[i].done)
 			done++;
 		i++;
 	}

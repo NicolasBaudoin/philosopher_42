@@ -6,11 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:07:23 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:18:22 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	init_philo(t_data *data)
 {
@@ -52,8 +52,6 @@ int	init_mutex(t_data *data)
 		return (1);
 	if (pthread_mutex_init(&data->meal_mutex, NULL))
 		return (1);
-	if (pthread_mutex_init(&data->forks_mutex, NULL))
-		return (1);
 	if (init_forks(data))
 		return (1);
 	return (0);
@@ -80,14 +78,12 @@ int	init_data(char **av, t_data *data)
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
-	data->philo_done = 0;
-	data->thread_alive = data->number_of_philo;
-	data->forks_available = data->number_of_philo / 2;
+	data->dead = 0;
+	data->start_time = get_time();
 	if (!av[5] || !av[5][0])
 		data->nb_time_philo_must_eat = 0;
 	else
 		data->nb_time_philo_must_eat = ft_atoi(av[5]);
-	data->dead = 0;
 	if (init_malloc(data))
 		return (1);
 	if (init_mutex(data))
@@ -95,7 +91,6 @@ int	init_data(char **av, t_data *data)
 		free_all(data);
 		return (1);
 	}
-	data->start_time = get_time();
 	init_philo(data);
 	return (0);
 }

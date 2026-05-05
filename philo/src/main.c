@@ -5,23 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 15:17:37 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:25:42 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/05 10:28:25 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/05 11:41:08 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-	int		sim;
 
 	if (input_not_valid(ac, av))
 		return (1);
 	if (init_data(av, &data))
 		return (1);
-	sim = simulation(&data);
+	if (simulation(&data))
+	{
+		free_all(&data);
+		return (1);
+	}
 	free_all(&data);
-	return (sim);
+	return (0);
 }

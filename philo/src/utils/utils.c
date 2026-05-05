@@ -6,11 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 10:36:17 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 11:09:30 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:33:14 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../../philo.h"
 
 int	ft_isdigit(int c)
 {

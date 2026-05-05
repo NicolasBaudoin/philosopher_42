@@ -5,20 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 11:48:47 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:22:24 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/05 11:48:26 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/05 12:00:27 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+#include <pthread.h>
 
-int	philo_done(t_data *data)
+int	check_starvation(t_data *data, int *i)
 {
 	pthread_mutex_lock(&data->meal_mutex);
-	if (data->nb_time_philo_must_eat > 0 && data->philo_done
-		>= data->number_of_philo)
+	if (get_time() - data->philo[*i].time_last_meal > data->time_to_die)
 	{
 		pthread_mutex_unlock(&data->meal_mutex);
+		write_status(&data->philo[*i], "died");
 		set_dead(data);
 		return (1);
 	}
@@ -26,21 +27,26 @@ int	philo_done(t_data *data)
 	return (0);
 }
 
-void	update_last_meal(t_data *data, long *last_meal, int *i)
+int	check_nb_meal(t_data *data)
 {
-	pthread_mutex_lock(&data->meal_mutex);
-	*last_meal = data->philo[*i].time_last_meal;
-	pthread_mutex_unlock(&data->meal_mutex);
-}
+	int	i;
+	int	done;
 
-int	philo_starved_to_death(t_data *data, long *last_meal, int *i)
-{
-	if (get_time() - *last_meal >= data->time_to_die)
+	if (data->nb_time_philo_must_eat == 0)
+		return (0);
+	i = 0;
+	done = 0;
+	pthread_mutex_lock(&data->meal_mutex);
+	while (i < data->number_of_philo)
 	{
-		pthread_mutex_lock(&data->write_mutex);
-		data->dead = 1;
-		write_output(data, data->philo[*i].id, " died\n");
-		pthread_mutex_unlock(&data->write_mutex);
+		if (data->philo[i].nb_meal_eaten >= data->nb_time_philo_must_eat)
+			done++;
+		i++;
+	}
+	pthread_mutex_unlock(&data->meal_mutex);
+	if (done == data->number_of_philo)
+	{
+		set_dead(data);
 		return (1);
 	}
 	return (0);

@@ -5,79 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/01 10:37:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:30:00 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/05 12:03:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include <unistd.h>
+#include "../philo.h"
 
-void	solo_philo(t_philo *philo)
+int	solo_philo(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
-	write_status(philo, "has taken a fork");
-	update_sleep(philo->data->time_to_die);
-	write_status(philo, "died");
-	set_dead(philo->data);
-	pthread_mutex_unlock(philo->left_fork);
-}
-
-void	*monitor(void *arg)
-{
-	t_data	*data;
-	int		i;
-	long	last_meal;
-
-	data = (t_data *)arg;
-	while (!is_dead(data))
+	if (philo->data->number_of_philo == 1)
 	{
-		i = 0;
-		while (i < data->number_of_philo)
-		{
-			if (philo_done(data))
-				return (NULL);
-			update_last_meal(data, &last_meal, &i);
-			pthread_mutex_lock(&data->dead_mutex);
-			if (philo_starved_to_death(data, &last_meal, &i))
-			{
-				pthread_mutex_unlock(&data->dead_mutex);
-				return (NULL);
-			}
-			pthread_mutex_unlock(&data->dead_mutex);
-			i++;
-		}
-		usleep(200);
+		pthread_mutex_lock(philo->left_fork);
+		write_status(philo, "has taken a fork");
+		update_sleep(philo->data->time_to_die);
+		write_status(philo, "died");
+		pthread_mutex_unlock(philo->left_fork);
+		return (1);
 	}
-	return (NULL);
+	return (0);
 }
 
-void	*routine(void	*arg)
+void	*routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(1000);
-	if (philo->data->number_of_philo == 1)
-	{
-		solo_philo(philo);
-		update_thread_alive(philo);
+		usleep(500);
+	if (solo_philo(philo))
 		return (NULL);
-	}
 	while (!is_dead(philo->data))
 	{
-		wait_for_forks(philo);
-		usleep(100);
-		take_forks(philo);
-		if (eat_meal(philo))
-		{
-			update_thread_alive(philo);
-			return (NULL);
-		}
-		sleep_and_think(philo);
+		if (philo_eat(philo))
+			break ;
+		write_status(philo, "is sleeping");
+		update_sleep(philo->data->time_to_sleep);
+		if (is_dead(philo->data))
+			break ;
+		write_status(philo, "is thinking");
 	}
-	update_thread_alive(philo);
 	return (NULL);
 }
 
@@ -95,6 +62,28 @@ int	init_thread(t_data *data, pthread_t *tids)
 	return (0);
 }
 
+void	*monitor(void *arg)
+{
+	t_data	*data;
+	int		i;
+
+	data = (t_data *)arg;
+	while (!is_dead(data))
+	{
+		i = 0;
+		while (i < data->number_of_philo)
+		{
+			if (check_starvation(data, &i))
+				return (NULL);
+			i++;
+		}
+		if (check_nb_meal(data))
+			return (NULL);
+		usleep(500);
+	}
+	return (NULL);
+}
+
 int	simulation(t_data *data)
 {
 	pthread_t	*tids;
@@ -104,6 +93,11 @@ int	simulation(t_data *data)
 	tids = malloc(sizeof(pthread_t) * data->number_of_philo);
 	if (!tids)
 		return (1);
+	if (pthread_create((&monitor_tid), NULL, monitor, data))
+	{
+		free(tids);
+		return (1);
+	}
 	if (init_thread(data, tids))
 	{
 		free(tids);
@@ -112,12 +106,10 @@ int	simulation(t_data *data)
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		pthread_detach(tids[i]);
+		pthread_join(tids[i], NULL);
 		i++;
 	}
-	pthread_create(&monitor_tid, NULL, monitor, data);
 	pthread_join(monitor_tid, NULL);
-	wait_thread(data);
 	free(tids);
 	return (0);
 }

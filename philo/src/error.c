@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 15:20:55 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:26:07 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/05 10:29:31 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/05 10:29:42 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	display_error(char *error_msg, int arg_pos, char *arg_value)
 {

@@ -6,11 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:19:05 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 13:30:08 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:31:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	input_not_valid(int ac, char **av)
 {

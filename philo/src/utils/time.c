@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/29 13:55:27 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:23:21 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/05/05 10:31:55 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/05/05 10:32:32 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../../philo.h"
 
 long	get_time(void)
 {

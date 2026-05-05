@@ -6,12 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 10:03:56 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:27:29 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:45:22 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
-#include <pthread.h>
+#include "../../philo.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -53,24 +52,8 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-void	write_output(t_data *data, int philo, char *output)
-{
-	ft_putnbr_fd(get_time() - data->start_time, 1);
-	ft_putstr_fd(" ", 1);
-	ft_putnbr_fd(philo, 1);
-	ft_putstr_fd(output, 1);
-}
-
 void	write_status(t_philo *philo, char *status)
 {
-	pthread_mutex_lock(&philo->data->dead_mutex);
-	if (philo->data->dead)
-	{
-		pthread_mutex_unlock(&philo->data->dead_mutex);
-		return ;
-	}
-	pthread_mutex_unlock(&philo->data->dead_mutex);
-
 	pthread_mutex_lock(&philo->data->write_mutex);
 	ft_putnbr_fd(get_time() - philo->data->start_time, 1);
 	ft_putstr_fd(" ", 1);

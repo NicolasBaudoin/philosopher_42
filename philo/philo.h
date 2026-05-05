@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/03 14:20:47 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:55:14 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ typedef struct s_data
 	int				nb_time_philo_must_eat;
 	long			start_time;
 	int				dead;
-	int				philo_done;
-	int				thread_alive;
-	int				forks_available;
-	pthread_mutex_t	forks_mutex;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	*forks;
@@ -84,21 +80,17 @@ int		simulation(t_data *data);
 void	*routine(void	*arg);
 
 // ==========
-// Norme adaptation
+// split functions into specific task sub_function
 // ==========
 
 // routine
 
-void	take_forks(t_philo *philo);
-void	drop_forks(t_philo *philo);
-int		eat_meal(t_philo *philo);
-void	sleep_and_think(t_philo *philo);
+int	philo_eat(t_philo *philo);
 
 // monitor
 
-int		philo_done(t_data *data);
-int		philo_starved_to_death(t_data *data, long *last_meal, int *i);
-void	update_last_meal(t_data *data, long *last_meal, int *i);
+int	check_starvation(t_data *data, int *i);
+int	check_nb_meal(t_data *data);
 
 // simulation
 

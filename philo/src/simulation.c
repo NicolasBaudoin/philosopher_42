@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 15:43:19 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:05:25 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*routine(void *arg)
 			break ;
 		write_status(philo, "is thinking");
 	}
+	usleep(10);
 	return (NULL);
 }
 

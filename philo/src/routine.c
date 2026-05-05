@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:15:29 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 15:48:54 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:05:10 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int	philo_eat(t_philo *philo)
 		philo->done = 1;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 	write_status(philo, "is eating");
-	// update_sleep(philo->data->time_to_eat);
-	usleep(philo->data->time_to_eat * 500);
+	usleep(philo->data->time_to_eat * 1000);
 	drop_forks(philo);
 	return (0);
 }

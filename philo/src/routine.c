@@ -6,12 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:15:29 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 16:05:10 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:26:14 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <pthread.h>
 
 void	drop_forks(t_philo *philo)
 {
@@ -19,18 +18,33 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-int	philo_eat(t_philo *philo)
+static int	check_meal_done(t_philo *philo)
 {
-	if (is_dead(philo->data))
-		return (1);
 	pthread_mutex_lock(&philo->data->meal_mutex);
-	if (philo->data->nb_time_philo_must_eat > 0 && philo->nb_meal_eaten >= philo->data->nb_time_philo_must_eat)
+	if (philo->data->nb_time_philo_must_eat > 0 && philo->nb_meal_eaten
+		>= philo->data->nb_time_philo_must_eat)
 	{
 		philo->done = 1;
 		pthread_mutex_unlock(&philo->data->meal_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->meal_mutex);
+	return (0);
+}
+
+void	meal_update(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->meal_mutex);
+	philo->time_last_meal = get_time();
+	philo->nb_meal_eaten++;
+	if (philo->data->nb_time_philo_must_eat > 0
+		&& philo->nb_meal_eaten >= philo->data->nb_time_philo_must_eat)
+		philo->done = 1;
+	pthread_mutex_unlock(&philo->data->meal_mutex);
+}
+
+static void	take_fork(t_philo *philo)
+{
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
@@ -45,18 +59,19 @@ int	philo_eat(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		write_status(philo, "has taken a fork");
 	}
+}
+
+int	philo_eat(t_philo *philo)
+{
+	if (is_dead(philo->data) || check_meal_done(philo))
+		return (1);
+	take_fork(philo);
 	if (is_dead(philo->data))
 	{
 		drop_forks(philo);
 		return (1);
 	}
-	pthread_mutex_lock(&philo->data->meal_mutex);
-		philo->time_last_meal = get_time();
-	philo->nb_meal_eaten++;
-	if (philo->data->nb_time_philo_must_eat > 0
-	&& philo->nb_meal_eaten >= philo->data->nb_time_philo_must_eat)
-		philo->done = 1;
-	pthread_mutex_unlock(&philo->data->meal_mutex);
+	meal_update(philo);
 	write_status(philo, "is eating");
 	usleep(philo->data->time_to_eat * 1000);
 	drop_forks(philo);

@@ -6,12 +6,12 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:48:26 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 15:20:25 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:37:03 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <pthread.h>
+#include <bits/pthreadtypes.h>
 
 int	check_starvation(t_data *data, int *i)
 {
@@ -50,4 +50,16 @@ int	check_nb_meal(t_data *data)
 		return (1);
 	}
 	return (0);
+}
+
+void	join_tids(pthread_t *tids, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		pthread_join(tids[i], NULL);
+		i++;
+	}
 }

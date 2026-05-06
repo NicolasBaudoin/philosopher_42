@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:04:03 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 15:19:02 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:36:48 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,18 @@ void	*routine(void	*arg);
 
 // routine
 
-int	philo_eat(t_philo *philo);
+int		philo_eat(t_philo *philo);
 
 // monitor
 
-int	check_starvation(t_data *data, int *i);
-int	check_nb_meal(t_data *data);
+int		check_starvation(t_data *data, int *i);
+int		check_nb_meal(t_data *data);
 
 // simulation
 
 void	wait_thread(t_data *data);
 void	wait_for_forks(t_philo *philo);
+void	join_tids(pthread_t *tids, t_data *data);
 
 // ==========
 // @UTILS

@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 16:05:25 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:37:24 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	solo_philo(t_philo *philo)
 {
-    if (philo->data->number_of_philo == 1)
-    {
-        pthread_mutex_lock(philo->left_fork);
-        write_status(philo, "has taken a fork");
-        while (!is_dead(philo->data))
-            usleep(200);
-        pthread_mutex_unlock(philo->left_fork);
-        return (1);
-    }
-    return (0);
+	if (philo->data->number_of_philo == 1)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		write_status(philo, "has taken a fork");
+		while (!is_dead(philo->data))
+			usleep(200);
+		pthread_mutex_unlock(philo->left_fork);
+		return (1);
+	}
+	return (0);
 }
 
 void	*routine(void *arg)
@@ -89,7 +89,6 @@ int	simulation(t_data *data)
 {
 	pthread_t	*tids;
 	pthread_t	monitor_tid;
-	int			i;
 
 	tids = malloc(sizeof(pthread_t) * data->number_of_philo);
 	if (!tids)
@@ -104,12 +103,7 @@ int	simulation(t_data *data)
 		free(tids);
 		return (1);
 	}
-	i = 0;
-	while (i < data->number_of_philo)
-	{
-		pthread_join(tids[i], NULL);
-		i++;
-	}
+	join_tids(tids, data);
 	pthread_join(monitor_tid, NULL);
 	free(tids);
 	return (0);

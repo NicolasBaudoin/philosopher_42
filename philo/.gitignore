@@ -2,3 +2,4 @@ philo
 *.o
 ig.c
 .code-workspace
+.txt

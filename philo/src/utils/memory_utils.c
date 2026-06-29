@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 13:01:29 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/06 16:35:24 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/20 15:25:27 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_all(t_data *data)
 		free(data->forks);
 		data->forks = NULL;
 		pthread_mutex_destroy(&data->write_mutex);
-		pthread_mutex_destroy(&data->dead_mutex);
 		pthread_mutex_destroy(&data->meal_mutex);
 	}
 	if (data->philo)

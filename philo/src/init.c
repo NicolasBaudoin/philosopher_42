@@ -6,11 +6,12 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/05 11:18:22 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/29 19:59:18 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+#include <pthread.h>
 
 void	init_philo(t_data *data)
 {
@@ -22,6 +23,7 @@ void	init_philo(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].time_last_meal = data->start_time;
 		data->philo[i].nb_meal_eaten = 0;
+		data->philo[i].done = 0;
 		data->philo[i].left_fork = &data->forks[i];
 		data->philo[i].right_fork = &data->forks[(i + 1)
 			% data->number_of_philo];
@@ -38,7 +40,11 @@ int	init_forks(t_data *data)
 	while (i < data->number_of_philo)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL))
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&data->forks[i]);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -48,12 +54,17 @@ int	init_mutex(t_data *data)
 {
 	if (pthread_mutex_init(&data->write_mutex, NULL))
 		return (1);
-	if (pthread_mutex_init(&data->dead_mutex, NULL))
-		return (1);
 	if (pthread_mutex_init(&data->meal_mutex, NULL))
+	{
+		pthread_mutex_destroy(&data->write_mutex);
 		return (1);
+	}
 	if (init_forks(data))
+	{
+		pthread_mutex_destroy(&data->meal_mutex);
+		pthread_mutex_destroy(&data->write_mutex);
 		return (1);
+	}
 	return (0);
 }
 

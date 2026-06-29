@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:28:25 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/06 16:36:28 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/20 15:09:53 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (input_not_valid(ac, av))
-		return (1);
-	if (init_data(av, &data))
+	if (input_not_valid(ac, av) || init_data(av, &data))
 		return (1);
 	if (simulation(&data))
 	{

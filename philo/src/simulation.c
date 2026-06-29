@@ -6,11 +6,12 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/06 16:37:24 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/29 20:00:49 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+#include <unistd.h>
 
 int	solo_philo(t_philo *philo)
 {
@@ -18,8 +19,7 @@ int	solo_philo(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		write_status(philo, "has taken a fork");
-		while (!is_dead(philo->data))
-			usleep(200);
+		update_sleep(philo->data->time_to_eat);
 		pthread_mutex_unlock(philo->left_fork);
 		return (1);
 	}
@@ -39,13 +39,14 @@ void	*routine(void *arg)
 	{
 		if (philo_eat(philo))
 			break ;
+		if (is_dead(philo->data))
+			break ;
 		write_status(philo, "is sleeping");
 		update_sleep(philo->data->time_to_sleep);
 		if (is_dead(philo->data))
 			break ;
 		write_status(philo, "is thinking");
 	}
-	usleep(10);
 	return (NULL);
 }
 
@@ -80,7 +81,7 @@ void	*monitor(void *arg)
 		}
 		if (check_nb_meal(data))
 			return (NULL);
-		update_sleep(1000);
+		usleep(1000);
 	}
 	return (NULL);
 }

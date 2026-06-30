@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/06/29 20:00:49 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/30 11:13:15 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		update_sleep(philo->data->time_to_eat);
+		update_sleep(philo->data->time_to_eat / 2);
 	if (solo_philo(philo))
 		return (NULL);
 	while (!is_dead(philo->data))
@@ -46,6 +46,10 @@ void	*routine(void *arg)
 		if (is_dead(philo->data))
 			break ;
 		write_status(philo, "is thinking");
+		if (philo->data->number_of_philo > 100)
+			usleep(100);
+		if (philo->data->number_of_philo % 2 != 0)
+			usleep(500); // laisse le temps a l'os de redistribuer les fourchettes
 	}
 	return (NULL);
 }
@@ -78,6 +82,8 @@ void	*monitor(void *arg)
 			if (check_starvation(data, &i))
 				return (NULL);
 			i++;
+			if (i % 10 == 0)
+				usleep(100);
 		}
 		if (check_nb_meal(data))
 			return (NULL);

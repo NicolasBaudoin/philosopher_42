@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:31:55 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/06 16:35:15 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/06/30 10:43:33 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	update_sleep(long miliseconds)
 
 	now = get_time();
 	while (get_time() - now < miliseconds)
-		usleep(200);
+		usleep(500);
 	return (1);
 }

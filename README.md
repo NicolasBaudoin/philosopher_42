@@ -116,9 +116,13 @@ This will generate the executable: `philo`
 
 # 4 philosophers — someone should die
 ./philo 4 310 200 100
+./philo 4 310 200 100 10
 
 # 5 philosophers — stops after 7 meals each
 ./philo 5 800 200 200 7
+
+./philo 200 130 60 60
+./philo 199 240 60 60
 ```
 
 **Expected output:**

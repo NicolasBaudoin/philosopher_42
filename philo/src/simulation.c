@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/06/30 11:13:15 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:30:54 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ void	*routine(void *arg)
 		if (philo->data->number_of_philo > 100)
 			usleep(100);
 		if (philo->data->number_of_philo % 2 != 0)
-			usleep(500); // laisse le temps a l'os de redistribuer les fourchettes
+			usleep(500);
 	}
 	return (NULL);
 }
+// line 52 laisse le temps a l'os de redistribuer les fourchettes
 
 int	init_thread(t_data *data, pthread_t *tids)
 {

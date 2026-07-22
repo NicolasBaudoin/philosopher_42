@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:19:05 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/05/06 16:16:04 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:38:43 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	input_not_positive_or_too_high(char **av)
 	i = 1;
 	while (av[i])
 	{
-		if (atol(av[i]) <= 0 || atol(av[i]) > INT_MAX)
+		if (ft_atol(av[i]) <= 0 || ft_atol(av[i]) > INT_MAX)
 		{
 			display_error(" is invalid", i, av[i]);
 			return (1);

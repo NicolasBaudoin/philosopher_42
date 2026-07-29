@@ -6,13 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:48:26 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/06/20 15:27:24 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:35:57 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <bits/pthreadtypes.h>
-#include <pthread.h>
 
 int	check_starvation(t_data *data, int *i)
 {

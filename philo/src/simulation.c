@@ -6,12 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/22 11:30:54 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:35:41 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <unistd.h>
 
 int	solo_philo(t_philo *philo)
 {

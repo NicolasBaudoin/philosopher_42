@@ -6,12 +6,11 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 17:43:18 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/06/29 19:59:18 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:36:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <pthread.h>
 
 void	init_philo(t_data *data)
 {

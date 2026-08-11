@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:36:28 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 14:35:41 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/08/12 01:32:24 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	*routine(void *arg)
 	}
 	return (NULL);
 }
-// line 52 laisse le temps a l'os de redistribuer les fourchettes
 
 int	init_thread(t_data *data, pthread_t *tids)
 {
